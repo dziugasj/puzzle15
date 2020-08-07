@@ -46,18 +46,22 @@ public class InMemoryGameRepository implements GameRepository {
     @Override
     public Game findByGameId(String id) {
         synchronized (lock) {
-            requireNonNullGameId(id);
-            return ofNullable(gameMap.get(id)).orElseThrow(() -> new GameNotFoundException(id));
+            return findGame(id);
         }
     }
 
     @Override
     public void updateGameTilePosition(String gameId, int position) {
         synchronized (lock) {
-            var game = findByGameId(gameId);
+            var game = findGame(gameId);
             game.updateTile(position);
             saveGame(game);
         }
+    }
+
+    private Game findGame(String id) {
+        requireNonNullGameId(id);
+        return ofNullable(gameMap.get(id)).orElseThrow(() -> new GameNotFoundException(id));
     }
 
     private void requireNonNullGameId(String id) {

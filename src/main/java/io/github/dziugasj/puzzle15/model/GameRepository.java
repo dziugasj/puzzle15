@@ -1,5 +1,7 @@
 package io.github.dziugasj.puzzle15.model;
 
+import io.github.dziugasj.puzzle15.view.GameView;
+
 import java.util.Collection;
 
 public interface GameRepository {

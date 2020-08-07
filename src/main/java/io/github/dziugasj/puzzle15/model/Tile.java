@@ -4,6 +4,9 @@ import com.google.common.base.Objects;
 
 import java.util.Optional;
 
+/**
+ * An immutable object representing Tile state.
+ */
 class Tile {
     private final Optional<Integer> value;
 
@@ -13,6 +16,10 @@ class Tile {
 
     public boolean free() {
         return value.isEmpty();
+    }
+
+    public String getView() {
+        return value.map(Object::toString).orElse("");
     }
 
     @Override
@@ -26,5 +33,12 @@ class Tile {
     @Override
     public int hashCode() {
         return Objects.hashCode(value);
+    }
+
+    @Override
+    public String toString() {
+        return "Tile{" +
+                "value=" + value +
+                '}';
     }
 }

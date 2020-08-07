@@ -1,14 +1,24 @@
 package io.github.dziugasj.puzzle15.model;
 
+import io.github.dziugasj.puzzle15.view.TileView;
+
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+import static com.google.common.collect.ImmutableMap.copyOf;
+import static com.google.common.collect.ImmutableMap.toImmutableMap;
 import static java.lang.String.valueOf;
 import static java.util.Objects.requireNonNull;
 import static java.util.Optional.ofNullable;
+import static java.util.stream.Collectors.toUnmodifiableMap;
 import static java.util.stream.Stream.of;
 
+/**
+ * A mutable object representing board state.
+ */
 final class Board {
     private final Map<Integer, Tile> tiles;
     private final int dimension;
@@ -21,6 +31,20 @@ final class Board {
 
     protected Tile getTile(int position) {
         return tiles.get(position);
+    }
+
+    protected Map<Integer, Tile> getTiles() {
+        return copyOf(tiles);
+    }
+
+    protected TileView getTileView() {
+        return new TileView(getView());
+    }
+
+    private Map<Integer, String> getView() {
+        return tiles.entrySet()
+                .stream()
+                .collect(toImmutableMap(Map.Entry::getKey, entry -> entry.getValue().getView()));
     }
 
     protected int getDimension() {
