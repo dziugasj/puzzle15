@@ -4,14 +4,14 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
 import java.util.Collection;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static java.util.Objects.requireNonNull;
+import static java.util.Optional.ofNullable;
 
 @Component
 @SessionScope
 public class InMemoryGameRepository implements GameRepository {
-
     private final ConcurrentHashMap<String, Game> gameMap = new ConcurrentHashMap<>();
 
     private final GameUuidGenerator generator;
@@ -38,14 +38,14 @@ public class InMemoryGameRepository implements GameRepository {
 
     @Override
     public Game findByGameId(String id) {
-        requireNonNull(id);
+        requireNonNullGameId(id);
+        return ofNullable(gameMap.get(id)).orElseThrow(() -> new GameNotFoundException(id));
+    }
 
-
-        // TODO It will be null if not found
-        var game = gameMap.get(id);
-
-
-        return game;
+    private void requireNonNullGameId(String id) {
+        if (Objects.isNull(id)) {
+            throw new GameNotFoundException(id);
+        }
     }
 
     private void saveGame(String gameId, Game game) {

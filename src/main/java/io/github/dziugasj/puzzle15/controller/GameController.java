@@ -2,8 +2,6 @@ package io.github.dziugasj.puzzle15.controller;
 
 import io.github.dziugasj.puzzle15.model.Game;
 import io.github.dziugasj.puzzle15.model.GameRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
