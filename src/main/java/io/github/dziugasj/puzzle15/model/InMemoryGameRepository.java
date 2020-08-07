@@ -21,20 +21,23 @@ public class InMemoryGameRepository implements GameRepository {
 
     @Override
     public Game create() {
-        var gameId = generator.generate();
-        //var game = new Game(gameId, boardFactory.createBoard());
-        //saveGame(gameId, game);
+        // TODO Use dimension as a parameter
+        var game = new Game(generator.generate(), boardFactory.createShuffledBoard(4));
+        saveGame(game.getId(), game);
 
         return null;
     }
 
     @Override
-    public Game findByGameId(String gameId) {
+    public Game findByGameId(String id) {
+        requireNonNull(id);
 
-        requireNonNull(gameId);
+
+
+
 
         // TODO It will be null if not found
-        var game = gameMap.get(gameId);
+        var game = gameMap.get(id);
 
 
         return game;

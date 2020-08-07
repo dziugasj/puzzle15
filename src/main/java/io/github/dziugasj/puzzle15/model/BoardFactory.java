@@ -2,36 +2,19 @@ package io.github.dziugasj.puzzle15.model;
 
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
-import static java.util.stream.Collectors.toUnmodifiableList;
-import static java.util.stream.IntStream.range;
-
 @Component
 class BoardFactory {
-    private final int highTile = 15;
-    private final List<Tile> tiles = createTiles(highTile);
+    private final TileProvider tileProvider;
 
-    BoardFactory() {
-
+    BoardFactory(TileProvider tileProvider) {
+        this.tileProvider = tileProvider;
     }
 
-    Board createSortedBoard() {
-        //return new Board(tiles);
-        return null;
+    Board createShuffledBoard(int dimension) {
+        return new Board(tileProvider.getTiles(toSize(dimension)), dimension);
     }
 
-
-
-
-
-    private List<Tile> createTiles(int highTile) {
-        /*
-        return range(1, highTile)
-                .mapToObj(Tile::new)
-                .collect(toUnmodifiableList()); */
-        return null;
+    private int toSize(int dimension) {
+        return dimension * dimension;
     }
-
-
 }
