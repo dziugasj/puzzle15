@@ -4,72 +4,97 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import static java.lang.String.valueOf;
 import static java.util.Objects.requireNonNull;
+import static java.util.Optional.ofNullable;
+import static java.util.stream.Stream.of;
 
 final class Board {
-    // Position, Tile
     private final Map<Integer, Tile> tiles;
+    private final int dimension;
 
-    public Board(Map<Integer, Tile> tiles) {
+    Board(Map<Integer, Tile> tiles, int dimension) {
         requireNonNull(tiles);
         this.tiles = new HashMap<>(tiles);
+        this.dimension = dimension;
+    }
+
+    protected Tile getTile(int position) {
+        return tiles.get(position);
+    }
+
+    protected int getDimension() {
+        return dimension;
     }
 
     public void updateTile(int position) {
         requireValidPosition(position);
 
-        //var newPosition = getNewPosition(tileId).orElseThrow(() -> new RuntimeException()); // TODO Replace to custom exception
-        //tiles.put(tileId, newPosition);
-
-        var column = getColumn(position);
-        var line = getLine(position);
-        var newPosition = getFreeNeighbourPosition(position);
-
+        var newPosition = getFreeAdjacentPosition(position).orElseThrow(() -> new MoveNotPossibleException(position));
         switchPlaces(position, newPosition);
     }
 
-    private void switchPlaces(int from, int to) {
+    protected void switchPlaces(int from, int to) {
+        var fromTile = tiles.get(from);
+        var toTile = tiles.get(to);
 
-
-        var fromTile = tiles.get()
-
-
-        var oldValue = tiles.put()
-
-
+        tiles.put(to, fromTile);
+        tiles.put(from, toTile);
     }
 
     private void requireValidPosition(int position) {
-        if (position >= tiles.size())
-            throw new RuntimeException(); // TODO replace to proper exception
+        if (position >= tiles.size() || position < 0)
+            throw new IllegalArgumentException();
     }
 
-    private int getFreeNeighbourPosition(int position) {
+    protected Optional<Integer> getFreeAdjacentPosition(int position) {
+        var down = getPosition(Direction.DOWN, position);
+        var up = getPosition(Direction.UP, position);
+        var left = getPosition(Direction.LEFT, position);
+        var right = getPosition(Direction.RIGHT, position);
 
-        getTileDown()
-
-
+        return of(down, up, left, right)
+                .filter(this::hasFreeTile)
+                .findFirst();
     }
 
-    private int getTileDown(int position) {
-
-
+    protected boolean hasFreeTile(int position) {
+        return ofNullable(tiles.get(position))
+                .map(Tile::free)
+                .orElse(false);
     }
 
-    private int getColumn(int position) {
+    protected int getPosition(Direction direction, int position) {
+        var column = getColumn(position);
+        var line = getLine(position);
 
+        switch (direction) {
+            case DOWN:
+                return getPosition(column, line - 1);
+            case UP:
+                return getPosition(column, line + 1);
+            case LEFT:
+                return getPosition(column - 1, line);
+            case RIGHT:
+                return getPosition(column + 1, line);
+            default:
+                throw new IllegalArgumentException(valueOf(direction)); // TODO
+        }
     }
 
-    private int getLine(int position) {
-
-
+    protected int getPosition(int column, int line) {
+        return dimension * line + column;
     }
 
+    protected int getColumn(int position) {
+        return position % dimension;
+    }
 
-    private Optional<Integer> getNewPosition(int tileId) {
-        // TODO where to validate the move ?
+    protected int getLine(int position) {
+        return position / dimension;
+    }
 
-        return Optional.empty();
-
+    protected enum Direction {
+        DOWN, UP, LEFT, RIGHT
     }
 }

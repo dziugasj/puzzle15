@@ -17,7 +17,8 @@ class BoardFactory {
     }
 
     Board createSortedBoard() {
-        return new Board(tiles);
+        //return new Board(tiles);
+        return null;
     }
 
 
@@ -25,9 +26,11 @@ class BoardFactory {
 
 
     private List<Tile> createTiles(int highTile) {
+        /*
         return range(1, highTile)
                 .mapToObj(Tile::new)
-                .collect(toUnmodifiableList());
+                .collect(toUnmodifiableList()); */
+        return null;
     }
 
 

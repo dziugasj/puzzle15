@@ -22,10 +22,10 @@ public class InMemoryGameRepository implements GameRepository {
     @Override
     public Game create() {
         var gameId = generator.generate();
-        var game = new Game(gameId, boardFactory.createBoard());
-        saveGame(gameId, game);
+        //var game = new Game(gameId, boardFactory.createBoard());
+        //saveGame(gameId, game);
 
-        return game;
+        return null;
     }
 
     @Override
