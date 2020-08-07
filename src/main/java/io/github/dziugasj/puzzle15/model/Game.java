@@ -1,7 +1,6 @@
 package io.github.dziugasj.puzzle15.model;
 
 public class Game {
-
     private final String id;
     private final Board board;
 
@@ -14,8 +13,8 @@ public class Game {
         return id;
     }
 
-    public Board getBoard() {
-        return board;
+    public void updateTile(int position) {
+        board.updateTile(position);
     }
 
     @Override

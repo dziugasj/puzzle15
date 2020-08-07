@@ -3,7 +3,7 @@ package io.github.dziugasj.puzzle15.model;
 import org.springframework.stereotype.Component;
 
 @Component
-class BoardFactory {
+public class BoardFactory {
     private final TileProvider tileProvider;
 
     BoardFactory(TileProvider tileProvider) {
