@@ -9,4 +9,6 @@ public interface GameRepository {
     Game create(int dimension);
 
     Game findByGameId(String gameId);
+
+    void updateGameTilePosition(String gameId, int position);
 }

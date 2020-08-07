@@ -30,7 +30,7 @@ public class GameController {
 
     @GetMapping("/{gameId}")
     public Game getGame(@PathVariable String gameId) {
-        return findGame(gameId);
+        return gameRepository.findByGameId(gameId);
     }
 
     @PostMapping("/test")
@@ -40,10 +40,6 @@ public class GameController {
 
     @PutMapping("/{gameId}/tiles/{tileId}")
     public void updateTilePosition(@PathVariable String gameId, @PathVariable Integer position) {
-        findGame(gameId).updateTile(position);
-    }
-
-    private Game findGame(String gameId) {
-        return gameRepository.findByGameId(gameId);
+        gameRepository.updateGameTilePosition(gameId, position);
     }
 }
