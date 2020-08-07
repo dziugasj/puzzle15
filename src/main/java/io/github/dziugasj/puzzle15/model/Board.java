@@ -3,17 +3,13 @@ package io.github.dziugasj.puzzle15.model;
 import io.github.dziugasj.puzzle15.view.TileView;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
-import static com.google.common.collect.ImmutableMap.copyOf;
 import static com.google.common.collect.ImmutableMap.toImmutableMap;
 import static java.lang.String.valueOf;
 import static java.util.Objects.requireNonNull;
 import static java.util.Optional.ofNullable;
-import static java.util.stream.Collectors.toUnmodifiableMap;
 import static java.util.stream.Stream.of;
 
 /**
@@ -33,8 +29,13 @@ final class Board {
         return tiles.get(position);
     }
 
-    protected Map<Integer, Tile> getTiles() {
-        return copyOf(tiles);
+    protected boolean sorted() {
+        return false;
+//
+//        tiles.entrySet()
+//                .stream()
+//                .filter(entry -> !entry.getValue().free())
+//                .anyMatch(entry -> String.valueOf(entry.getKey() + 1) == entry.getValue().);
     }
 
     protected TileView getTileView() {

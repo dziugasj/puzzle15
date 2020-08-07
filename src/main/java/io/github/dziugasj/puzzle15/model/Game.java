@@ -2,8 +2,6 @@ package io.github.dziugasj.puzzle15.model;
 
 import io.github.dziugasj.puzzle15.view.GameView;
 
-import java.util.Map;
-
 /**
  * A mutable object representing game state.
  */
@@ -26,13 +24,24 @@ public class Game {
     }
 
     public void updateTile(int position) {
-        // TODO Check game state and throw GameCompletedException if game ended
-        // TODO save gameComplete flag
-
+        requireOngoingGame();
         board.updateTile(position);
+        updateGameState();
     }
 
-    public enum GameState{
+    private void updateGameState() {
+        if(board.sorted()) {
+            gameState = GameState.FINISHED;
+        }
+    }
+
+    private void requireOngoingGame() {
+        if (gameState != GameState.ONGOING) {
+            throw new GameCompletedException(id);
+        }
+    }
+
+    public enum GameState {
         ONGOING, FINISHED;
     }
 

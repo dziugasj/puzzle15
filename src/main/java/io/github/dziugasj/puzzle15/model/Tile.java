@@ -7,7 +7,7 @@ import java.util.Optional;
 /**
  * An immutable object representing Tile state.
  */
-class Tile {
+class Tile<T> {
     private final Optional<Integer> value;
 
     Tile(Optional<Integer> value) {
