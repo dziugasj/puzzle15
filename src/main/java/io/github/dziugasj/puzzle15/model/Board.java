@@ -21,11 +21,11 @@ import static java.util.stream.Stream.of;
 /**
  * A mutable object representing board state.
  */
-final class Board {
+public class Board {
     private final Map<Integer, Tile> tiles;
     private final int dimension;
 
-    Board(Map<Integer, Tile> tiles, int dimension) {
+    public Board(Map<Integer, Tile> tiles, int dimension) {
         requireNonNull(tiles);
         this.tiles = new HashMap<>(tiles);
         this.dimension = dimension;
