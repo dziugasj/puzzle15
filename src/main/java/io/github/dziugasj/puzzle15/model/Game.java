@@ -44,11 +44,4 @@ public class Game {
     public enum GameState {
         ONGOING, FINISHED;
     }
-
-    @Override
-    public String toString() {
-        return "Game{" +
-                "gameId='" + id + '\'' +
-                '}';
-    }
 }

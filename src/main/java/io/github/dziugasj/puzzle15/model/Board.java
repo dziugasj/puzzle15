@@ -1,5 +1,6 @@
 package io.github.dziugasj.puzzle15.model;
 
+import com.google.common.collect.ImmutableMap;
 import io.github.dziugasj.puzzle15.view.TileView;
 
 import java.util.Comparator;
@@ -9,6 +10,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import static com.google.common.collect.Comparators.isInOrder;
+import static com.google.common.collect.ImmutableMap.copyOf;
 import static com.google.common.collect.ImmutableMap.toImmutableMap;
 import static java.lang.String.valueOf;
 import static java.util.Objects.requireNonNull;
@@ -33,6 +35,10 @@ public class Board {
         return tiles.get(position);
     }
 
+    protected Map<Integer, Tile> getTiles() {
+        return copyOf(tiles);
+    }
+
     protected boolean lastIsFree() {
         return tiles.get(tiles.size() - 1).free();
     }
@@ -52,7 +58,7 @@ public class Board {
                 .collect(toList());
     }
 
-    protected TileView getTileView() {
+    public TileView getTileView() {
         return new TileView(getView());
     }
 
