@@ -11,7 +11,9 @@ import java.util.Map;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BoardTest {
 
@@ -39,6 +41,18 @@ class BoardTest {
 
         assertEquals(to, board.getTile(11));
         assertEquals(from, board.getTile(15));
+    }
+
+    @Test
+    void sorted() {
+        assertTrue(board.sorted());
+    }
+
+    @Test
+    void notSorted() {
+        board.updateTile(14);
+
+        assertFalse(board.sorted());
     }
 
     @Test
@@ -105,9 +119,9 @@ class BoardTest {
 
     @Test
     void hasFreeTile() {
-        assertEquals(false, board.hasFreeTile(0));
-        assertEquals(true, board.hasFreeTile(15));
-        assertEquals(false, board.hasFreeTile(50)); // TODO new test
+        assertFalse(board.hasFreeTile(0));
+        assertTrue(board.hasFreeTile(15));
+        assertFalse(board.hasFreeTile(50)); // TODO new test
     }
 
     private Board createBoardOf4x4() {
@@ -119,18 +133,18 @@ class BoardTest {
         map.put(0, new Tile(of(1)));
         map.put(1, new Tile(of(2)));
         map.put(2, new Tile(of(3)));
-        map.put(3, new Tile(of(3)));
-        map.put(4, new Tile(of(4)));
-        map.put(5, new Tile(of(5)));
-        map.put(6, new Tile(of(6)));
-        map.put(7, new Tile(of(7)));
-        map.put(8, new Tile(of(8)));
-        map.put(9, new Tile(of(9)));
-        map.put(10, new Tile(of(10)));
-        map.put(11, new Tile(of(11)));
-        map.put(12, new Tile(of(12)));
-        map.put(13, new Tile(of(13)));
-        map.put(14, new Tile(of(14)));
+        map.put(3, new Tile(of(4)));
+        map.put(4, new Tile(of(5)));
+        map.put(5, new Tile(of(6)));
+        map.put(6, new Tile(of(7)));
+        map.put(7, new Tile(of(8)));
+        map.put(8, new Tile(of(9)));
+        map.put(9, new Tile(of(10)));
+        map.put(10, new Tile(of(11)));
+        map.put(11, new Tile(of(12)));
+        map.put(12, new Tile(of(13)));
+        map.put(13, new Tile(of(14)));
+        map.put(14, new Tile(of(15)));
         map.put(15, new Tile(empty()));
 
         return map;
