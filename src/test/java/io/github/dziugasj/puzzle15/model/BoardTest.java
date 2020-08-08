@@ -34,7 +34,6 @@ class BoardTest {
         assertThrows(MoveNotPossibleException.class, () -> board.updateTile(5));
         assertThrows(MoveNotPossibleException.class, () -> board.updateTile(10));
 
-        // TODO
         var from = board.getTile(11);
         var to = board.getTile(15);
 
@@ -79,8 +78,6 @@ class BoardTest {
 
     @Test
     void getPosition2() {
-        // TODO rename
-
         assertEquals(1, board.getPosition(Direction.DOWN, 5));
         assertEquals(9, board.getPosition(Direction.UP, 5));
         assertEquals(4, board.getPosition(Direction.LEFT, 5));
@@ -122,7 +119,7 @@ class BoardTest {
     void hasFreeTile() {
         assertFalse(board.hasFreeTile(0));
         assertTrue(board.hasFreeTile(15));
-        assertFalse(board.hasFreeTile(50)); // TODO new test
+        assertFalse(board.hasFreeTile(50));
     }
 
     private Board createBoardOf4x4() {
