@@ -22,10 +22,10 @@ public class InMemoryGameRepository implements GameRepository {
      */
     private final Object lock = new Object();
 
-    private final GameUuidGenerator generator;
+    private final GameIdGenerator<String> generator;
     private final BoardFactory boardFactory;
 
-    public InMemoryGameRepository(GameUuidGenerator generator, BoardFactory boardFactory) {
+    public InMemoryGameRepository(GameIdGenerator<String> generator, BoardFactory boardFactory) {
         this.generator = generator;
         this.boardFactory = boardFactory;
     }
