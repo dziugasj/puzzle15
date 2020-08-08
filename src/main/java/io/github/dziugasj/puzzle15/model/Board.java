@@ -1,6 +1,5 @@
 package io.github.dziugasj.puzzle15.model;
 
-import com.google.common.collect.Comparators;
 import io.github.dziugasj.puzzle15.view.TileView;
 
 import java.util.Comparator;
@@ -8,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static com.google.common.collect.Comparators.isInOrder;
 import static com.google.common.collect.ImmutableMap.toImmutableMap;
@@ -36,7 +34,7 @@ public class Board {
     }
 
     protected boolean lastIsFree() {
-        return tiles.get(tiles.size()-1).free();
+        return tiles.get(tiles.size() - 1).free();
     }
 
     protected boolean sorted() {
@@ -71,7 +69,7 @@ public class Board {
     public void updateTile(int position) {
         requireValidPosition(position);
 
-        var newPosition = getFreeAdjacentPosition(position).orElseThrow(() -> new MoveNotPossibleException(position));
+        int newPosition = getFreeAdjacentPosition(position).orElseThrow(() -> new MoveNotPossibleException(position));
         switchPlaces(position, newPosition);
     }
 
@@ -89,10 +87,10 @@ public class Board {
     }
 
     protected Optional<Integer> getFreeAdjacentPosition(int position) {
-        var down = getPosition(Direction.DOWN, position);
-        var up = getPosition(Direction.UP, position);
-        var left = getPosition(Direction.LEFT, position);
-        var right = getPosition(Direction.RIGHT, position);
+        int down = getPosition(Direction.DOWN, position);
+        int up = getPosition(Direction.UP, position);
+        int left = getPosition(Direction.LEFT, position);
+        int right = getPosition(Direction.RIGHT, position);
 
         return of(down, up, left, right)
                 .filter(this::hasFreeTile)
@@ -106,8 +104,8 @@ public class Board {
     }
 
     protected int getPosition(Direction direction, int position) {
-        var column = getColumn(position);
-        var line = getLine(position);
+        int column = getColumn(position);
+        int line = getLine(position);
 
         switch (direction) {
             case DOWN:
@@ -119,7 +117,7 @@ public class Board {
             case RIGHT:
                 return getPosition(column + 1, line);
             default:
-                throw new IllegalArgumentException(valueOf(direction)); // TODO
+                throw new IllegalArgumentException(valueOf(direction));
         }
     }
 

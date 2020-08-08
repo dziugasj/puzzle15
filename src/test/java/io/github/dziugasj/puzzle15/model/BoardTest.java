@@ -1,7 +1,6 @@
 package io.github.dziugasj.puzzle15.model;
 
 import io.github.dziugasj.puzzle15.model.Board.Direction;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -26,8 +25,10 @@ class BoardTest {
 
     @Test
     void updateTile() {
+        int size = getSize(board.getDimension());
+
         assertThrows(IllegalArgumentException.class, () -> board.updateTile(-1));
-        assertThrows(IllegalArgumentException.class, () -> board.updateTile(board.getDimension()*board.getDimension()));
+        assertThrows(IllegalArgumentException.class, () -> board.updateTile(size));
 
         assertThrows(MoveNotPossibleException.class, () -> board.updateTile(0));
         assertThrows(MoveNotPossibleException.class, () -> board.updateTile(5));
@@ -148,5 +149,9 @@ class BoardTest {
         map.put(15, new Tile(empty()));
 
         return map;
+    }
+
+    private int getSize(int dimension) {
+        return dimension*dimension;
     }
 }

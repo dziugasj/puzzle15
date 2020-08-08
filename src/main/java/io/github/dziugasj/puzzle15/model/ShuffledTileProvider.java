@@ -17,11 +17,11 @@ public class ShuffledTileProvider implements TileProvider {
 
     @Override
     public Map<Integer, Tile> getTiles(int size) {
-        var list = createTileList(size - 1);
-        list.add(new Tile(empty()));
-        shuffle(list);
+        var tiles = createTiles(size - 1);
+        tiles.add(new Tile(empty()));
+        shuffle(tiles);
 
-        return toMap(list);
+        return toMap(tiles);
     }
 
     private Map<Integer, Tile> toMap(List<Tile> list) {
@@ -30,7 +30,7 @@ public class ShuffledTileProvider implements TileProvider {
                 .collect(Collectors.toMap(identity(), list::get));
     }
 
-    private List<Tile> createTileList(int size) {
+    private List<Tile> createTiles(int size) {
         return range(1, size)
                 .mapToObj(value -> new Tile(of(value)))
                 .collect(Collectors.toList());
