@@ -16,6 +16,6 @@ public class TileView {
     }
 
     public Map<Integer, String> getTiles() {
-        return tiles;
+        return copyOf(tiles);
     }
 }

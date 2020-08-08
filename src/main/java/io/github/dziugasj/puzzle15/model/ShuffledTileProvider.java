@@ -10,6 +10,7 @@ import static java.util.Collections.shuffle;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static java.util.function.Function.identity;
+import static java.util.stream.Collectors.toList;
 import static java.util.stream.IntStream.range;
 
 @Component
@@ -17,7 +18,7 @@ public class ShuffledTileProvider implements TileProvider {
 
     @Override
     public Map<Integer, Tile> getTiles(int size) {
-        var tiles = createTiles(size - 1);
+        var tiles = createTiles(size);
         tiles.add(new Tile(empty()));
         shuffle(tiles);
 
@@ -33,6 +34,6 @@ public class ShuffledTileProvider implements TileProvider {
     private List<Tile> createTiles(int size) {
         return range(1, size)
                 .mapToObj(value -> new Tile(of(value)))
-                .collect(Collectors.toList());
+                .collect(toList());
     }
 }
