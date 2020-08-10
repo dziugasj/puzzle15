@@ -54,7 +54,7 @@ public class Puzzle15Board implements Board {
         switchPlaces(position, newPosition);
     }
 
-    protected void switchPlaces(int from, int to) {
+    private void switchPlaces(int from, int to) {
         var fromTile = tiles.get(from);
         var toTile = tiles.get(to);
 

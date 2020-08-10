@@ -1,8 +1,8 @@
 package io.github.dziugasj.puzzle15.game.model;
 
 import io.github.dziugasj.puzzle15.board.model.Puzzle15Board;
-import io.github.dziugasj.puzzle15.game.exception.GameCompletedException;
 import io.github.dziugasj.puzzle15.board.view.TileView;
+import io.github.dziugasj.puzzle15.game.exception.GameCompletedException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,12 +27,12 @@ class Puzzle15Test {
     }
 
     @Test
-    void getId() {
+    void hasGame_getGameId_idReturned() {
         assertEquals(GAME_ID, puzzle15.getId());
     }
 
     @Test
-    void getGameView() {
+    void hasGame_getView_viewReturned() {
         var tileView = createStubTileView();
         when(puzzle15Board.getTileView()).thenReturn(tileView);
 
@@ -44,7 +44,7 @@ class Puzzle15Test {
     }
 
     @Test
-    void updateTile_whenPossible() {
+    void hasGame_playGame_tilePositionUpdated() {
         int position = 0;
 
         puzzle15.playGame(new Puzzle15Parameters(position));
@@ -53,7 +53,7 @@ class Puzzle15Test {
     }
 
     @Test
-    void updateTile_whenGameCompleted() {
+    void gameWasCompleted_playGame_gameCompletedExceptionThrown() {
         int position = 0;
         when(puzzle15Board.sorted()).thenReturn(true);
         updateGameState();

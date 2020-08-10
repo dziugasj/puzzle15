@@ -1,6 +1,7 @@
 package io.github.dziugasj.puzzle15.board.model;
 
 import io.github.dziugasj.puzzle15.board.service.TileProviderService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
@@ -19,7 +20,12 @@ class Puzzle15BoardFactoryTest {
 
     private final TileProviderService tileProviderService = mock(TileProviderService.class);
 
-    private final BoardFactory boardFactory = new BoardFactory(tileProviderService);
+    private BoardFactory boardFactory;
+
+    @BeforeEach
+    private void beforeEach() {
+        boardFactory = new BoardFactory(tileProviderService);
+    }
 
     @Test
     void dimensionProvided_createCalled_createdWithProperSize() {

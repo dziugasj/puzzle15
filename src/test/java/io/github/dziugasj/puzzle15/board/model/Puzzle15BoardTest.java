@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class Puzzle15BoardTest {
+    private final static int SIZE = 16;
 
     private Puzzle15Board puzzle15Board;
 
@@ -22,16 +23,20 @@ class Puzzle15BoardTest {
     }
 
     @Test
-    void updateTile() {
-        int size = getSize(puzzle15Board.getDimension());
-
+    void correctBoard_wrongParamPassed_illegalArgumentExceptionThrown() {
         assertThrows(IllegalArgumentException.class, () -> puzzle15Board.updateTile(-1));
-        assertThrows(IllegalArgumentException.class, () -> puzzle15Board.updateTile(size));
+        assertThrows(IllegalArgumentException.class, () -> puzzle15Board.updateTile(SIZE));
+    }
 
+    @Test
+    void correctBoard_wrongMove_moveNotPossibleExceptionThrown() {
         assertThrows(MoveNotPossibleException.class, () -> puzzle15Board.updateTile(0));
         assertThrows(MoveNotPossibleException.class, () -> puzzle15Board.updateTile(5));
         assertThrows(MoveNotPossibleException.class, () -> puzzle15Board.updateTile(10));
+    }
 
+    @Test
+    void correctBoard_tileMoved_tileIsInNewPosition() {
         var from = puzzle15Board.getTile(11);
         var to = puzzle15Board.getTile(15);
 
@@ -42,32 +47,12 @@ class Puzzle15BoardTest {
     }
 
     @Test
-    void sorted() {
+    void correctBoard_getStatus_isSorted() {
         assertTrue(puzzle15Board.sorted());
     }
 
     @Test
-    void notSorted() {
-        puzzle15Board.updateTile(14);
-
-        assertFalse(puzzle15Board.sorted());
-    }
-
-    @Test
-    void switchPlaces() {
-        var from = 0;
-        var to = 3;
-        var fromTile = puzzle15Board.getTile(from);
-        var toTile = puzzle15Board.getTile(to);
-
-        puzzle15Board.switchPlaces(from, to);
-
-        assertEquals(fromTile, puzzle15Board.getTile(to));
-        assertEquals(toTile, puzzle15Board.getTile(from));
-    }
-
-    @Test
-    void getPosition() {
+    void correctBoard_getPosition_properPosition() {
         assertEquals(0, puzzle15Board.getPosition(0, 0));
         assertEquals(5, puzzle15Board.getPosition(1, 1));
         assertEquals(10, puzzle15Board.getPosition(2, 2));
@@ -75,7 +60,7 @@ class Puzzle15BoardTest {
     }
 
     @Test
-    void getPosition2() {
+    void correctBoard_getPositionByDirection_properPosition() {
         assertEquals(1, puzzle15Board.getPositionByDirection(Direction.DOWN, 5));
         assertEquals(9, puzzle15Board.getPositionByDirection(Direction.UP, 5));
         assertEquals(4, puzzle15Board.getPositionByDirection(Direction.LEFT, 5));
@@ -83,7 +68,7 @@ class Puzzle15BoardTest {
     }
 
     @Test
-    void getColumn() {
+    void correctBoard_getColumn_properColumnFound() {
         assertEquals(0, puzzle15Board.getColumn(0));
         assertEquals(1, puzzle15Board.getColumn(5));
         assertEquals(2, puzzle15Board.getColumn(10));
@@ -91,7 +76,7 @@ class Puzzle15BoardTest {
     }
 
     @Test
-    void getLine() {
+    void correctBoard_getLine_properLineFound() {
         assertEquals(0, puzzle15Board.getLine(0));
         assertEquals(1, puzzle15Board.getLine(5));
         assertEquals(2, puzzle15Board.getLine(10));
@@ -99,13 +84,13 @@ class Puzzle15BoardTest {
     }
 
     @Test
-    void getTile() {
+    void correctBoard_getTile_properTileFound() {
         assertEquals(of(1), puzzle15Board.getTile(0));
         assertEquals(empty(), puzzle15Board.getTile(15));
     }
 
     @Test
-    void getFreeAdjacentPosition() {
+    void correctBoard_getFreeAdjacentPosition_properResult() {
         assertEquals(empty(), puzzle15Board.getFreeAdjacentPosition(0));
         assertEquals(empty(), puzzle15Board.getFreeAdjacentPosition(5));
         assertEquals(empty(), puzzle15Board.getFreeAdjacentPosition(10));
@@ -114,7 +99,7 @@ class Puzzle15BoardTest {
     }
 
     @Test
-    void hasFreeTile() {
+    void correctBoard_hasFreeTile_properFreeTilesFound() {
         assertFalse(puzzle15Board.getTiles().hasFreeTile(0));
         assertTrue(puzzle15Board.getTiles().hasFreeTile(15));
         assertFalse(puzzle15Board.getTiles().hasFreeTile(50));
@@ -144,9 +129,5 @@ class Puzzle15BoardTest {
         map.put(15, empty());
 
         return map;
-    }
-
-    private int getSize(int dimension) {
-        return dimension * dimension;
     }
 }

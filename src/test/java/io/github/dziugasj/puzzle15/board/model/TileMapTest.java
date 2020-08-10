@@ -19,7 +19,7 @@ class TileMapTest {
     }
 
     @Test
-    void getView() {
+    void sortedMap_getView_representedCorrectly() {
         assertEquals("1", tileMap.getView().get(0));
         assertEquals("2", tileMap.getView().get(1));
         assertEquals("3", tileMap.getView().get(2));
@@ -27,18 +27,18 @@ class TileMapTest {
     }
 
     @Test
-    void hasFreeTile() {
+    void sortedMap_hasFreeTile_shownProperly() {
         assertFalse(tileMap.hasFreeTile(0));
         assertTrue(tileMap.hasFreeTile(3));
     }
 
     @Test
-    void sortedByTileValue() {
+    void sortedMap_sortedByTileValue_isSorted() {
         assertTrue(tileMap.sortedByTileValue());
     }
 
     @Test
-    void unsortedByTileValue() {
+    void unsortedMap_sortedByTileValue_isUnsorted() {
         tileMap.put(0, of(2));
 
         assertTrue(tileMap.sortedByTileValue());

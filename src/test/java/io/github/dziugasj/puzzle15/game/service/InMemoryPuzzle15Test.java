@@ -28,12 +28,12 @@ class InMemoryPuzzle15Test {
     }
 
     @Test
-    void getGames_whenNoGamesSaved() {
+    void noGames_getGames_nothingReturned() {
         assertTrue(repository.getGames().isEmpty());
     }
 
     @Test
-    void getGames_whenCreated() {
+    void noGames_createGame_singleGameStoredInSavedMemory() {
         int size = 1;
 
         repository.create(createGameSupplier());
@@ -42,19 +42,19 @@ class InMemoryPuzzle15Test {
     }
 
     @Test
-    void createAndFind() {
+    void noGames_createGame_gameWithCorrectIdSavedInMemory() {
         var game = repository.create(createGameSupplier());
 
         assertEquals(game, repository.findByGameId(game.getId()));
     }
 
     @Test
-    void find_whenNotAvailable() {
+    void noGames_findGame_gameNotFoundExceptionThrown() {
         assertThrows(GameNotFoundException.class, () -> repository.findByGameId(GAME_ID));
     }
 
     @Test
-    void updateGameTilePosition() {
+    void hasGame_playGame_gameTilesUpdated() {
         int position = 0;
         var game = repository.create(createGameSupplier());
 

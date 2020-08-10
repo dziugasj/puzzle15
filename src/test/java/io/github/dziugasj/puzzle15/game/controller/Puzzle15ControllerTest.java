@@ -15,7 +15,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Collection;
 
-import static java.util.Collections.emptyMap;
 import static java.util.List.of;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
@@ -42,7 +41,7 @@ class Puzzle15ControllerTest {
     private GameFactory gameFactory;
 
     @Test
-    void getGames() throws Exception {
+    void hasListOfSingleGame_getGames_singleItemReturned() throws Exception {
         when(gameService.getGames()).thenReturn(getStubGames());
 
         this.mockMvc.perform(get("/games"))
@@ -52,7 +51,7 @@ class Puzzle15ControllerTest {
     }
 
     @Test
-    void viewGame_NotFound() throws Exception {
+    void noGamesInList_getGame_GameNotFoundExceptionThrown() throws Exception {
         when(gameService.findByGameId(any())).thenThrow(GameNotFoundException.class);
 
         this.mockMvc.perform(get("/games/{gameId}", GAME_ID))
@@ -61,7 +60,7 @@ class Puzzle15ControllerTest {
     }
 
     @Test
-    void getGame() throws Exception {
+    void hasListOfSingleGame_getGame_gameReturned() throws Exception {
         when(gameService.findByGameId(GAME_ID)).thenReturn(getStubGame());
 
         this.mockMvc.perform(get("/games/{gameId}", GAME_ID))
@@ -71,7 +70,7 @@ class Puzzle15ControllerTest {
     }
 
     @Test
-    void createGame() throws Exception {
+    void noGames_createGame_gameCreated() throws Exception {
         when(gameService.create(any())).thenReturn(getStubGame());
 
         this.mockMvc.perform(post("/games"))
@@ -81,7 +80,7 @@ class Puzzle15ControllerTest {
     }
 
     @Test
-    void playGame() throws Exception {
+    void hasGame_playGame_exceptionNotThrown() throws Exception {
         int position = 5;
 
         this.mockMvc.perform(put("/games/{gameId}/tiles/{position}", GAME_ID, position))

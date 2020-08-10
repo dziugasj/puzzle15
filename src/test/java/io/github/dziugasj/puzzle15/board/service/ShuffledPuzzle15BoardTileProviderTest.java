@@ -14,14 +14,14 @@ class ShuffledPuzzle15BoardTileProviderTest {
     private final ShuffledTileProvider shuffledTileProvider = new ShuffledTileProvider();
 
     @Test
-    void getTiles_ProperSize() {
+    void hasProvider_getTiles_ProperSize() {
         var tiles = shuffledTileProvider.getTiles(SIZE);
 
         assertEquals(SIZE, tiles.size());
     }
 
     @Test
-    void getTiles_hasSingleFreeTile() {
+    void hasProvider_getTiles_hasSingleFreeTile() {
         var tiles = shuffledTileProvider.getTiles(SIZE);
 
         assertTrue(hasSingleFreeTile(tiles));
