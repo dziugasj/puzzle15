@@ -1,6 +1,5 @@
-package io.github.dziugasj.puzzle15.game.model;
+package io.github.dziugasj.puzzle15.board.model;
 
-import io.github.dziugasj.puzzle15.board.model.BoardFactory;
 import io.github.dziugasj.puzzle15.tile.model.Tile;
 import io.github.dziugasj.puzzle15.tile.service.TileProviderService;
 import org.junit.jupiter.api.Test;

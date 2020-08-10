@@ -1,8 +1,8 @@
 package io.github.dziugasj.puzzle15.game.controller;
 
 import io.github.dziugasj.puzzle15.board.model.Board;
-import io.github.dziugasj.puzzle15.game.model.Game;
 import io.github.dziugasj.puzzle15.game.exception.GameNotFoundException;
+import io.github.dziugasj.puzzle15.game.model.Game;
 import io.github.dziugasj.puzzle15.game.service.GameService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,9 @@ import static java.util.List.of;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;

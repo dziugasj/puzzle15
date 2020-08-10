@@ -1,7 +1,6 @@
-package io.github.dziugasj.puzzle15.game.model;
+package io.github.dziugasj.puzzle15.board.model;
 
 import io.github.dziugasj.puzzle15.board.exception.MoveNotPossibleException;
-import io.github.dziugasj.puzzle15.board.model.Board;
 import io.github.dziugasj.puzzle15.board.model.Board.Direction;
 import io.github.dziugasj.puzzle15.tile.model.Tile;
 import org.junit.jupiter.api.BeforeEach;
@@ -152,6 +151,6 @@ class BoardTest {
     }
 
     private int getSize(int dimension) {
-        return dimension*dimension;
+        return dimension * dimension;
     }
 }
