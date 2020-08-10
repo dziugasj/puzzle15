@@ -1,9 +1,9 @@
 package io.github.dziugasj.puzzle15.board.service;
 
-import io.github.dziugasj.puzzle15.board.model.BoardTile;
+import io.github.dziugasj.puzzle15.board.model.TileMap;
 import org.junit.jupiter.api.Test;
 
-import java.util.Map;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -27,10 +27,10 @@ class ShuffledPuzzle15BoardTileProviderTest {
         assertTrue(hasSingleFreeTile(tiles));
     }
 
-    private boolean hasSingleFreeTile(Map<Integer, BoardTile> tiles) {
+    private boolean hasSingleFreeTile(TileMap tiles) {
         return tiles.values()
                 .stream()
-                .filter(BoardTile::free)
+                .filter(Optional::isEmpty)
                 .count() == 1;
     }
 }

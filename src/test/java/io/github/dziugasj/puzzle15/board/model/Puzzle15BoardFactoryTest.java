@@ -3,7 +3,7 @@ package io.github.dziugasj.puzzle15.board.model;
 import io.github.dziugasj.puzzle15.board.service.TileProviderService;
 import org.junit.jupiter.api.Test;
 
-import java.util.Map;
+import java.util.Optional;
 
 import static java.util.Optional.of;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,7 +15,7 @@ class Puzzle15BoardFactoryTest {
     private final static int DIMENSION = 4;
     private final static int SIZE = DIMENSION * DIMENSION;
     private final static int TILE_KEY = 0;
-    private final static int TILE_VALUE = 5;
+    private final static Optional<Integer> TILE_VALUE = of(5);
 
     private final TileProviderService tileProviderService = mock(TileProviderService.class);
 
@@ -23,6 +23,8 @@ class Puzzle15BoardFactoryTest {
 
     @Test
     void dimensionProvided_createCalled_createdWithProperSize() {
+        when(tileProviderService.getTiles(SIZE)).thenReturn(new TileMap());
+
         boardFactory.createShuffledBoard(DIMENSION);
 
         verify(tileProviderService).getTiles(SIZE);
@@ -34,10 +36,13 @@ class Puzzle15BoardFactoryTest {
 
         var board = boardFactory.createShuffledBoard(DIMENSION);
 
-        assertEquals(of(TILE_VALUE), board.getTiles().get(TILE_KEY).getValue());
+        assertEquals(TILE_VALUE, board.getTiles().get(TILE_KEY));
     }
 
-    private Map<Integer, BoardTile> createStubTiles() {
-        return Map.of(TILE_KEY, new BoardTile(of(TILE_VALUE)));
+    private TileMap createStubTiles() {
+        var map = new TileMap();
+        map.put(TILE_KEY, TILE_VALUE);
+
+        return map;
     }
 }

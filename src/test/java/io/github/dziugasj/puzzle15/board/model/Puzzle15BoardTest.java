@@ -5,9 +5,6 @@ import io.github.dziugasj.puzzle15.board.model.Puzzle15Board.Direction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -103,8 +100,8 @@ class Puzzle15BoardTest {
 
     @Test
     void getTile() {
-        assertEquals(new BoardTile(of(1)), puzzle15Board.getTile(0));
-        assertEquals(new BoardTile(empty()), puzzle15Board.getTile(15));
+        assertEquals(of(1), puzzle15Board.getTile(0));
+        assertEquals(empty(), puzzle15Board.getTile(15));
     }
 
     @Test
@@ -118,33 +115,33 @@ class Puzzle15BoardTest {
 
     @Test
     void hasFreeTile() {
-        assertFalse(puzzle15Board.hasFreeTile(0));
-        assertTrue(puzzle15Board.hasFreeTile(15));
-        assertFalse(puzzle15Board.hasFreeTile(50));
+        assertFalse(puzzle15Board.getTiles().hasFreeTile(0));
+        assertTrue(puzzle15Board.getTiles().hasFreeTile(15));
+        assertFalse(puzzle15Board.getTiles().hasFreeTile(50));
     }
 
     private Puzzle15Board createBoardOf4x4() {
         return new Puzzle15Board(mapOf4x4(), 4);
     }
 
-    private Map<Integer, BoardTile> mapOf4x4() {
-        var map = new HashMap<Integer, BoardTile>();
-        map.put(0, new BoardTile(of(1)));
-        map.put(1, new BoardTile(of(2)));
-        map.put(2, new BoardTile(of(3)));
-        map.put(3, new BoardTile(of(4)));
-        map.put(4, new BoardTile(of(5)));
-        map.put(5, new BoardTile(of(6)));
-        map.put(6, new BoardTile(of(7)));
-        map.put(7, new BoardTile(of(8)));
-        map.put(8, new BoardTile(of(9)));
-        map.put(9, new BoardTile(of(10)));
-        map.put(10, new BoardTile(of(11)));
-        map.put(11, new BoardTile(of(12)));
-        map.put(12, new BoardTile(of(13)));
-        map.put(13, new BoardTile(of(14)));
-        map.put(14, new BoardTile(of(15)));
-        map.put(15, new BoardTile(empty()));
+    private TileMap mapOf4x4() {
+        var map = new TileMap();
+        map.put(0, of(1));
+        map.put(1, of(2));
+        map.put(2, of(3));
+        map.put(3, of(4));
+        map.put(4, of(5));
+        map.put(5, of(6));
+        map.put(6, of(7));
+        map.put(7, of(8));
+        map.put(8, of(9));
+        map.put(9, of(10));
+        map.put(10, of(11));
+        map.put(11, of(12));
+        map.put(12, of(13));
+        map.put(13, of(14));
+        map.put(14, of(15));
+        map.put(15, empty());
 
         return map;
     }

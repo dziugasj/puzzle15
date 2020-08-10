@@ -24,7 +24,7 @@ public class Puzzle15Board implements Board {
         this.dimension = dimension;
     }
 
-    protected BoardTile getTile(int position) {
+    protected Optional<Integer> getTile(int position) {
         return tiles.get(position);
     }
 

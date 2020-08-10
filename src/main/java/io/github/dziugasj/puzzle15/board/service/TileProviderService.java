@@ -1,9 +1,7 @@
 package io.github.dziugasj.puzzle15.board.service;
 
-import io.github.dziugasj.puzzle15.board.model.BoardTile;
-
-import java.util.Map;
+import io.github.dziugasj.puzzle15.board.model.TileMap;
 
 public interface TileProviderService {
-    Map<Integer, BoardTile> getTiles(int size);
+    TileMap getTiles(int size);
 }

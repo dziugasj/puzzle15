@@ -1,16 +1,13 @@
 package io.github.dziugasj.puzzle15.board.service;
 
-import io.github.dziugasj.puzzle15.board.model.BoardTile;
+import io.github.dziugasj.puzzle15.board.model.TileMap;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 import static java.util.Collections.shuffle;
 import static java.util.Optional.empty;
-import static java.util.Optional.of;
-import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.IntStream.range;
 
@@ -18,23 +15,33 @@ import static java.util.stream.IntStream.range;
 public class ShuffledTileProvider implements TileProviderService {
 
     @Override
-    public Map<Integer, BoardTile> getTiles(int size) {
-        var tiles = createTiles(size);
-        tiles.add(new BoardTile(empty()));
-        shuffle(tiles);
+    public TileMap getTiles(int size) {
+        var list = createTileValues(size);
+        list.add(empty());
+        shuffle(list);
 
-        return toMap(tiles);
+        return toTileMap(list);
     }
 
-    private Map<Integer, BoardTile> toMap(List<BoardTile> list) {
-        return range(0, list.size())
-                .boxed()
-                .collect(Collectors.toMap(identity(), list::get));
+    private TileMap toTileMap(List<Optional<Integer>> list) {
+        return listElementsToMap(new TileMap(), list);
     }
 
-    private List<BoardTile> createTiles(int size) {
+    private List<Optional<Integer>> createTileValues(int size) {
         return range(1, size)
-                .mapToObj(value -> new BoardTile(of(value)))
+                .mapToObj(Optional::of)
                 .collect(toList());
+    }
+
+    private void toMap(TileMap map, List<Optional<Integer>> list, int key) {
+        map.put(key, list.get(key));
+    }
+
+    private TileMap listElementsToMap(TileMap map, List<Optional<Integer>> list) {
+        range(0, list.size())
+                .boxed()
+                .forEach(key -> toMap(map, list, key));
+
+        return map;
     }
 }

@@ -11,28 +11,27 @@ import static com.google.common.collect.ImmutableMap.toImmutableMap;
 import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toList;
 
-public class TileMap extends HashMap<Integer, BoardTile> {
+public class TileMap extends HashMap<Integer, Optional<Integer>> {
 
     private List<Integer> getTileValues() {
         return values().stream()
-                .map(BoardTile::getValue)
                 .flatMap(Optional::stream)
                 .collect(toList());
     }
 
     private boolean lastIsFree() {
-        return get(size() - 1).free();
+        return get(size() - 1).isEmpty();
     }
 
     protected Map<Integer, String> getView() {
         return entrySet()
                 .stream()
-                .collect(toImmutableMap(Map.Entry::getKey, entry -> entry.getValue().getView()));
+                .collect(toImmutableMap(Map.Entry::getKey, entry -> toString(entry.getValue())));
     }
 
     protected boolean hasFreeTile(int position) {
         return ofNullable(get(position))
-                .map(BoardTile::free)
+                .map(Optional::isEmpty)
                 .orElse(false);
     }
 
@@ -42,5 +41,9 @@ public class TileMap extends HashMap<Integer, BoardTile> {
         }
 
         return isInOrder(getTileValues(), Comparator.naturalOrder());
+    }
+
+    private String toString(Optional<Integer> value) {
+        return value.map(v -> Integer.toString(v)).orElse("");
     }
 }
