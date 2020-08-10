@@ -32,7 +32,7 @@ public class Game {
     }
 
     private void updateGameState() {
-        if(board.sorted()) {
+        if (board.sorted()) {
             gameState = GameState.FINISHED;
         }
     }
