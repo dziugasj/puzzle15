@@ -1,6 +1,9 @@
 package io.github.dziugasj.puzzle15.game.model;
 
-public class Puzzle15Parameters implements BoardGameParameters{
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode
+public class Puzzle15Parameters implements BoardGameParameters {
 
     private final int dimension;
 

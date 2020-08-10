@@ -1,13 +1,11 @@
 package io.github.dziugasj.puzzle15.game.controller;
 
 import io.github.dziugasj.puzzle15.board.model.Board;
-import io.github.dziugasj.puzzle15.board.model.BoardFactory;
 import io.github.dziugasj.puzzle15.game.exception.GameNotFoundException;
 import io.github.dziugasj.puzzle15.game.model.GameFactory;
 import io.github.dziugasj.puzzle15.game.model.Puzzle15;
 import io.github.dziugasj.puzzle15.game.model.Puzzle15Parameters;
 import io.github.dziugasj.puzzle15.game.service.GameService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;

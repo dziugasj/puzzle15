@@ -4,7 +4,7 @@ import io.github.dziugasj.puzzle15.board.service.TileProviderService;
 import org.springframework.stereotype.Component;
 
 @Component
-public final class BoardFactory {
+public class BoardFactory {
     private final TileProviderService tileProviderService;
 
     public BoardFactory(TileProviderService tileProviderService) {

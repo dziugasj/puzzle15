@@ -21,7 +21,7 @@ import static java.util.stream.Stream.of;
 /**
  * A mutable object representing board state.
  */
-public final class Board {
+public class Board {
     private final Map<Integer, BoardTile> tiles;
     private final int dimension;
 

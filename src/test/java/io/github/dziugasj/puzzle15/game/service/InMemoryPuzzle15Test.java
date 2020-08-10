@@ -18,10 +18,7 @@ import static org.mockito.Mockito.verify;
 
 class InMemoryPuzzle15Test {
     private final static String GAME_ID = "xxx-555-yyy";
-    private static final int DIMENSION = 4;
 
-    private final GameIdService<String> generator = mock(GameIdService.class);
-    private final BoardFactory boardFactory = mock(BoardFactory.class);
     private final Board board = mock(Board.class);
 
     private InMemoryGame repository;

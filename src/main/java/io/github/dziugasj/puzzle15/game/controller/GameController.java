@@ -52,7 +52,7 @@ public class GameController {
     }
 
     @PutMapping("/{gameId}/tiles/{position}")
-    public void updateTilePosition(@PathVariable String gameId, @PathVariable Integer position) {
+    public void playGame(@PathVariable String gameId, @PathVariable Integer position) {
         gameService.playGame(gameId, new Puzzle15Parameters(position));
     }
 
