@@ -10,7 +10,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-class InMemoryGameRepositoryTest {
+class InMemoryGameTest {
     private final static String GAME_ID = "xxx-555-yyy";
     private static final int DIMENSION = 4;
 
@@ -18,14 +18,14 @@ class InMemoryGameRepositoryTest {
     private final BoardFactory boardFactory = mock(BoardFactory.class);
     private final Board board = mock(Board.class);
 
-    private InMemoryGameRepository repository;
+    private InMemoryGame repository;
 
     @BeforeEach
     public void beforeEach() {
         when(generator.generate()).thenReturn(GAME_ID);
         when(boardFactory.createShuffledBoard(DIMENSION)).thenReturn(board);
 
-        repository = new InMemoryGameRepository(generator, boardFactory);
+        repository = new InMemoryGame(generator, boardFactory);
     }
 
     @Test

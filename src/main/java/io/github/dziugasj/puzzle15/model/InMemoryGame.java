@@ -10,11 +10,11 @@ import static java.util.Objects.isNull;
 import static java.util.Optional.ofNullable;
 
 /**
- * {@code InMemoryGameRepository} is persisted per client session
+ * {@code InMemoryGame} is persisted per client session
  */
 @Component
 @SessionScope
-public class InMemoryGameRepository implements GameRepository {
+public class InMemoryGame implements GameRepository {
     private final ConcurrentHashMap<String, Game> gameMap = new ConcurrentHashMap<>();
 
     /**
@@ -25,7 +25,7 @@ public class InMemoryGameRepository implements GameRepository {
     private final GameIdGenerator<String> generator;
     private final BoardFactory boardFactory;
 
-    public InMemoryGameRepository(GameIdGenerator<String> generator, BoardFactory boardFactory) {
+    public InMemoryGame(GameIdGenerator<String> generator, BoardFactory boardFactory) {
         this.generator = generator;
         this.boardFactory = boardFactory;
     }
