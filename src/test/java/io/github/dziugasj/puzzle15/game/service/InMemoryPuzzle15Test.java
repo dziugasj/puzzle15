@@ -1,7 +1,6 @@
 package io.github.dziugasj.puzzle15.game.service;
 
 import io.github.dziugasj.puzzle15.board.model.Board;
-import io.github.dziugasj.puzzle15.board.model.BoardFactory;
 import io.github.dziugasj.puzzle15.game.exception.GameNotFoundException;
 import io.github.dziugasj.puzzle15.game.model.Puzzle15;
 import io.github.dziugasj.puzzle15.game.model.Puzzle15Parameters;

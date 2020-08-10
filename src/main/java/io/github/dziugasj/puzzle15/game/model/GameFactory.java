@@ -18,6 +18,4 @@ public class GameFactory {
     public Puzzle15 createPuzzleGame(int dimension) {
         return new Puzzle15(generator.generate(), boardFactory.createShuffledBoard(dimension));
     }
-
-
 }

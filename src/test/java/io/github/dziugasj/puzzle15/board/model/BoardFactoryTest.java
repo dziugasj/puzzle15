@@ -8,10 +8,12 @@ import java.util.Map;
 import static java.util.Optional.of;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 class BoardFactoryTest {
     private final static int DIMENSION = 4;
+    private final static int SIZE = DIMENSION * DIMENSION;
     private final static int TILE_KEY = 0;
     private final static int TILE_VALUE = 5;
 
@@ -20,16 +22,19 @@ class BoardFactoryTest {
     private final BoardFactory boardFactory = new BoardFactory(tileProviderService);
 
     @Test
-    void createShuffledBoard() {
-        when(tileProviderService.getTiles(getSize(DIMENSION))).thenReturn(createStubTiles());
+    void dimensionProvided_createCalled_createdWithProperSize() {
+        boardFactory.createShuffledBoard(DIMENSION);
+
+        verify(tileProviderService).getTiles(SIZE);
+    }
+
+    @Test
+    void shuffledService_createCalled_ShuffledCreated() {
+        when(tileProviderService.getTiles(SIZE)).thenReturn(createStubTiles());
 
         var board = boardFactory.createShuffledBoard(DIMENSION);
 
         assertEquals(of(TILE_VALUE), board.getTiles().get(TILE_KEY).getValue());
-    }
-
-    private int getSize(int dimension) {
-        return dimension * dimension;
     }
 
     private Map<Integer, BoardTile> createStubTiles() {
