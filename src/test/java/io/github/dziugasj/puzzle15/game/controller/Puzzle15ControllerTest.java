@@ -16,6 +16,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.Collection;
 
 import static java.util.List.of;
+import static org.hamcrest.CoreMatchers.hasItems;
+import static org.hamcrest.Matchers.containsString;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -23,6 +25,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -76,7 +79,7 @@ class Puzzle15ControllerTest {
         this.mockMvc.perform(post("/games"))
                 .andDo(print())
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.gameId").value(GAME_ID));
+                .andExpect(header().stringValues("Location", hasItems(containsString(GAME_ID))));
     }
 
     @Test
