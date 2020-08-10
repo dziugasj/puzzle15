@@ -11,7 +11,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-class BoardFactoryTest {
+class Puzzle15BoardFactoryTest {
     private final static int DIMENSION = 4;
     private final static int SIZE = DIMENSION * DIMENSION;
     private final static int TILE_KEY = 0;

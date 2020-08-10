@@ -1,6 +1,6 @@
 package io.github.dziugasj.puzzle15.game.model;
 
-import io.github.dziugasj.puzzle15.board.model.Board;
+import io.github.dziugasj.puzzle15.board.model.Puzzle15Board;
 import io.github.dziugasj.puzzle15.game.exception.GameCompletedException;
 import io.github.dziugasj.puzzle15.board.view.TileView;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,13 +17,13 @@ import static org.mockito.Mockito.when;
 class Puzzle15Test {
     private final static String GAME_ID = "xxx-555-yyy";
 
-    private final Board board = mock(Board.class);
+    private final Puzzle15Board puzzle15Board = mock(Puzzle15Board.class);
 
     private Puzzle15 puzzle15;
 
     @BeforeEach
     public void beforeEach() {
-        puzzle15 = new Puzzle15(GAME_ID, board);
+        puzzle15 = new Puzzle15(GAME_ID, puzzle15Board);
     }
 
     @Test
@@ -34,7 +34,7 @@ class Puzzle15Test {
     @Test
     void getGameView() {
         var tileView = createStubTileView();
-        when(board.getTileView()).thenReturn(tileView);
+        when(puzzle15Board.getTileView()).thenReturn(tileView);
 
         var gameView = puzzle15.getGameView();
 
@@ -49,13 +49,13 @@ class Puzzle15Test {
 
         puzzle15.playGame(new Puzzle15Parameters(position));
 
-        verify(board).updateTile(position);
+        verify(puzzle15Board).updateTile(position);
     }
 
     @Test
     void updateTile_whenGameCompleted() {
         int position = 0;
-        when(board.sorted()).thenReturn(true);
+        when(puzzle15Board.sorted()).thenReturn(true);
         updateGameState();
 
         assertThrows(GameCompletedException.class, () -> puzzle15.playGame(new Puzzle15Parameters(position)));

@@ -8,7 +8,7 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class ShuffledBoardTileProviderTest {
+class ShuffledPuzzle15BoardTileProviderTest {
     private final static int SIZE = 4;
 
     private final ShuffledTileProvider shuffledTileProvider = new ShuffledTileProvider();

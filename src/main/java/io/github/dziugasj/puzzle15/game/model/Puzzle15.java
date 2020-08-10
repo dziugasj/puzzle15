@@ -7,7 +7,7 @@ import io.github.dziugasj.puzzle15.game.view.Puzzle15View;
 /**
  * A mutable object representing game state.
  */
-public final class Puzzle15 implements BoardGame{
+public final class Puzzle15 implements BoardGame {
     private final String id;
     private final Board board;
     private GameState gameState = GameState.ONGOING;

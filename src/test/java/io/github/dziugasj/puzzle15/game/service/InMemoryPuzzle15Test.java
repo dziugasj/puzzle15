@@ -1,6 +1,6 @@
 package io.github.dziugasj.puzzle15.game.service;
 
-import io.github.dziugasj.puzzle15.board.model.Board;
+import io.github.dziugasj.puzzle15.board.model.Puzzle15Board;
 import io.github.dziugasj.puzzle15.game.exception.GameNotFoundException;
 import io.github.dziugasj.puzzle15.game.model.Puzzle15;
 import io.github.dziugasj.puzzle15.game.model.Puzzle15Parameters;
@@ -18,7 +18,7 @@ import static org.mockito.Mockito.verify;
 class InMemoryPuzzle15Test {
     private final static String GAME_ID = "xxx-555-yyy";
 
-    private final Board board = mock(Board.class);
+    private final Puzzle15Board puzzle15Board = mock(Puzzle15Board.class);
 
     private InMemoryGame repository;
 
@@ -60,11 +60,11 @@ class InMemoryPuzzle15Test {
 
         repository.playGame(game.getId(), new Puzzle15Parameters(position));
 
-        verify(board).updateTile(position);
-        verify(board).sorted();
+        verify(puzzle15Board).updateTile(position);
+        verify(puzzle15Board).sorted();
     }
 
     private Supplier<Puzzle15> createGameSupplier() {
-        return () -> new Puzzle15(GAME_ID, board);
+        return () -> new Puzzle15(GAME_ID, puzzle15Board);
     }
 }

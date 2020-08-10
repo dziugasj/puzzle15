@@ -11,8 +11,8 @@ public class BoardFactory {
         this.tileProviderService = tileProviderService;
     }
 
-    public Board createShuffledBoard(int dimension) {
-        return new Board(tileProviderService.getTiles(toSize(dimension)), dimension);
+    public Puzzle15Board createShuffledBoard(int dimension) {
+        return new Puzzle15Board(tileProviderService.getTiles(toSize(dimension)), dimension);
     }
 
     private int toSize(int dimension) {

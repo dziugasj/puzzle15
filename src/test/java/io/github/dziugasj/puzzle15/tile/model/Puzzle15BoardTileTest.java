@@ -11,7 +11,7 @@ import static java.util.Optional.of;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class BoardTileTest {
+class Puzzle15BoardTileTest {
     private final static int NO = 5;
     private final static Optional<Integer> ANY_VALUE = of(NO);
     private final static Optional<Integer> EMPTY_VALUE = empty();

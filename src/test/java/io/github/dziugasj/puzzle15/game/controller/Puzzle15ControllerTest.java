@@ -1,6 +1,6 @@
 package io.github.dziugasj.puzzle15.game.controller;
 
-import io.github.dziugasj.puzzle15.board.model.Board;
+import io.github.dziugasj.puzzle15.board.model.Puzzle15Board;
 import io.github.dziugasj.puzzle15.game.exception.GameNotFoundException;
 import io.github.dziugasj.puzzle15.game.model.GameFactory;
 import io.github.dziugasj.puzzle15.game.model.Puzzle15;
@@ -98,7 +98,7 @@ class Puzzle15ControllerTest {
         return new Puzzle15(GAME_ID, getStubBoard());
     }
 
-    private Board getStubBoard() {
-        return new Board(emptyMap(), DIMENSION);
+    private Puzzle15Board getStubBoard() {
+        return new Puzzle15Board(emptyMap(), DIMENSION);
     }
 }
