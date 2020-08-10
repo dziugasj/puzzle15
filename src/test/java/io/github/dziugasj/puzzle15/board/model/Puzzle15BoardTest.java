@@ -121,10 +121,10 @@ class Puzzle15BoardTest {
     }
 
     private Puzzle15Board createBoardOf4x4() {
-        return new Puzzle15Board(mapOf4x4(), 4);
+        return new Puzzle15Board(createTileMap4x4(), 4);
     }
 
-    private TileMap mapOf4x4() {
+    private TileMap createTileMap4x4() {
         var map = new TileMap();
         map.put(0, of(1));
         map.put(1, of(2));
