@@ -1,4 +1,4 @@
-package io.github.dziugasj.puzzle15.tile.view;
+package io.github.dziugasj.puzzle15.board.view;
 
 import java.util.Map;
 

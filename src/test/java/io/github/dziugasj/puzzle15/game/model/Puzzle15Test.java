@@ -2,11 +2,11 @@ package io.github.dziugasj.puzzle15.game.model;
 
 import io.github.dziugasj.puzzle15.board.model.Board;
 import io.github.dziugasj.puzzle15.game.exception.GameCompletedException;
-import io.github.dziugasj.puzzle15.tile.view.TileView;
+import io.github.dziugasj.puzzle15.board.view.TileView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static io.github.dziugasj.puzzle15.game.model.Game.GameState.ONGOING;
+import static io.github.dziugasj.puzzle15.game.model.Puzzle15.GameState.ONGOING;
 import static java.util.Collections.emptyMap;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -14,21 +14,21 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-class GameTest {
+class Puzzle15Test {
     private final static String GAME_ID = "xxx-555-yyy";
 
     private final Board board = mock(Board.class);
 
-    private Game game;
+    private Puzzle15 puzzle15;
 
     @BeforeEach
     public void beforeEach() {
-        game = new Game(GAME_ID, board);
+        puzzle15 = new Puzzle15(GAME_ID, board);
     }
 
     @Test
     void getId() {
-        assertEquals(GAME_ID, game.getId());
+        assertEquals(GAME_ID, puzzle15.getId());
     }
 
     @Test
@@ -36,7 +36,7 @@ class GameTest {
         var tileView = createStubTileView();
         when(board.getTileView()).thenReturn(tileView);
 
-        var gameView = game.getGameView();
+        var gameView = puzzle15.getGameView();
 
         assertEquals(GAME_ID, gameView.getGameId());
         assertEquals(ONGOING.toString(), gameView.getGameState());
@@ -47,7 +47,7 @@ class GameTest {
     void updateTile_whenPossible() {
         int position = 0;
 
-        game.updateTile(position);
+        puzzle15.playGame(new Puzzle15Parameters(position));
 
         verify(board).updateTile(position);
     }
@@ -58,7 +58,7 @@ class GameTest {
         when(board.sorted()).thenReturn(true);
         updateGameState();
 
-        assertThrows(GameCompletedException.class, () -> game.updateTile(position));
+        assertThrows(GameCompletedException.class, () -> puzzle15.playGame(new Puzzle15Parameters(position)));
     }
 
     private TileView createStubTileView() {
@@ -66,6 +66,6 @@ class GameTest {
     }
 
     private void updateGameState() {
-        game.updateTile(0);
+        puzzle15.playGame(new Puzzle15Parameters(0));
     }
 }

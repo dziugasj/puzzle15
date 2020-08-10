@@ -1,8 +1,7 @@
 package io.github.dziugasj.puzzle15.board.model;
 
 import io.github.dziugasj.puzzle15.board.exception.MoveNotPossibleException;
-import io.github.dziugasj.puzzle15.tile.model.Tile;
-import io.github.dziugasj.puzzle15.tile.view.TileView;
+import io.github.dziugasj.puzzle15.board.view.TileView;
 
 import java.util.Comparator;
 import java.util.HashMap;
@@ -22,21 +21,21 @@ import static java.util.stream.Stream.of;
 /**
  * A mutable object representing board state.
  */
-public class Board {
-    private final Map<Integer, Tile> tiles;
+public final class Board {
+    private final Map<Integer, BoardTile> tiles;
     private final int dimension;
 
-    public Board(Map<Integer, Tile> tiles, int dimension) {
+    public Board(Map<Integer, BoardTile> tiles, int dimension) {
         requireNonNull(tiles);
         this.tiles = new HashMap<>(tiles);
         this.dimension = dimension;
     }
 
-    public Tile getTile(int position) {
+    public BoardTile getTile(int position) {
         return tiles.get(position);
     }
 
-    public Map<Integer, Tile> getTiles() {
+    public Map<Integer, BoardTile> getTiles() {
         return copyOf(tiles);
     }
 
@@ -54,7 +53,7 @@ public class Board {
 
     private List<Integer> getTileValues() {
         return tiles.values().stream()
-                .map(Tile::getValue)
+                .map(BoardTile::getValue)
                 .flatMap(Optional::stream)
                 .collect(toList());
     }
@@ -106,7 +105,7 @@ public class Board {
 
     public boolean hasFreeTile(int position) {
         return ofNullable(tiles.get(position))
-                .map(Tile::free)
+                .map(BoardTile::free)
                 .orElse(false);
     }
 

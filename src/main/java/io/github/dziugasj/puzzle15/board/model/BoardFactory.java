@@ -1,10 +1,10 @@
 package io.github.dziugasj.puzzle15.board.model;
 
-import io.github.dziugasj.puzzle15.tile.service.TileProviderService;
+import io.github.dziugasj.puzzle15.board.service.TileProviderService;
 import org.springframework.stereotype.Component;
 
 @Component
-public class BoardFactory {
+public final class BoardFactory {
     private final TileProviderService tileProviderService;
 
     public BoardFactory(TileProviderService tileProviderService) {

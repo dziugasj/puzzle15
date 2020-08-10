@@ -1,7 +1,6 @@
 package io.github.dziugasj.puzzle15.board.model;
 
-import io.github.dziugasj.puzzle15.tile.model.Tile;
-import io.github.dziugasj.puzzle15.tile.service.TileProviderService;
+import io.github.dziugasj.puzzle15.board.service.TileProviderService;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
@@ -33,7 +32,7 @@ class BoardFactoryTest {
         return dimension * dimension;
     }
 
-    private Map<Integer, Tile> createStubTiles() {
-        return Map.of(TILE_KEY, new Tile(of(TILE_VALUE)));
+    private Map<Integer, BoardTile> createStubTiles() {
+        return Map.of(TILE_KEY, new BoardTile(of(TILE_VALUE)));
     }
 }

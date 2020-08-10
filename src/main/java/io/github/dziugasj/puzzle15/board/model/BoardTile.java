@@ -1,4 +1,4 @@
-package io.github.dziugasj.puzzle15.tile.model;
+package io.github.dziugasj.puzzle15.board.model;
 
 import lombok.EqualsAndHashCode;
 
@@ -8,10 +8,10 @@ import java.util.Optional;
  * An immutable object representing Tile state.
  */
 @EqualsAndHashCode
-public class Tile {
+public class BoardTile {
     private final Optional<Integer> value;
 
-    public Tile(Optional<Integer> value) {
+    public BoardTile(Optional<Integer> value) {
         this.value = value;
     }
 

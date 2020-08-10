@@ -1,9 +1,13 @@
 package io.github.dziugasj.puzzle15.game.controller;
 
 import io.github.dziugasj.puzzle15.board.model.Board;
+import io.github.dziugasj.puzzle15.board.model.BoardFactory;
 import io.github.dziugasj.puzzle15.game.exception.GameNotFoundException;
-import io.github.dziugasj.puzzle15.game.model.Game;
+import io.github.dziugasj.puzzle15.game.model.GameFactory;
+import io.github.dziugasj.puzzle15.game.model.Puzzle15;
+import io.github.dziugasj.puzzle15.game.model.Puzzle15Parameters;
 import io.github.dziugasj.puzzle15.game.service.GameService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -25,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(GameController.class)
-class GameControllerTest {
+class Puzzle15ControllerTest {
     private final static String GAME_ID = "xxx-555-yyy";
     private final static int DIMENSION = 4;
 
@@ -34,6 +38,9 @@ class GameControllerTest {
 
     @MockBean
     private GameService gameService;
+
+    @MockBean
+    private GameFactory gameFactory;
 
     @Test
     void getGames() throws Exception {
@@ -66,7 +73,7 @@ class GameControllerTest {
 
     @Test
     void createGame() throws Exception {
-        when(gameService.create(DIMENSION)).thenReturn(getStubGame());
+        when(gameService.create(any())).thenReturn(getStubGame());
 
         this.mockMvc.perform(post("/games"))
                 .andDo(print())
@@ -75,22 +82,22 @@ class GameControllerTest {
     }
 
     @Test
-    void updateTilePosition() throws Exception {
+    void playGame() throws Exception {
         int position = 5;
 
         this.mockMvc.perform(put("/games/{gameId}/tiles/{position}", GAME_ID, position))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").doesNotExist());
-        verify(gameService).updateGameTilePosition(GAME_ID, position);
+        verify(gameService).playGame(GAME_ID, new Puzzle15Parameters(5));
     }
 
-    private Collection<Game> getStubGames() {
+    private Collection<Puzzle15> getStubGames() {
         return of(getStubGame());
     }
 
-    private Game getStubGame() {
-        return new Game(GAME_ID, getStubBoard());
+    private Puzzle15 getStubGame() {
+        return new Puzzle15(GAME_ID, getStubBoard());
     }
 
     private Board getStubBoard() {

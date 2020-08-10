@@ -1,16 +1,16 @@
 package io.github.dziugasj.puzzle15.game.view;
 
-import io.github.dziugasj.puzzle15.tile.view.TileView;
+import io.github.dziugasj.puzzle15.board.view.TileView;
 
 /**
  * An immutable view of the Game
  */
-public final class GameView {
+public final class Puzzle15View implements BoardGameView{
     private final String gameId;
     private final String gameState;
     private final TileView tileView;
 
-    public GameView(String gameId, String gameState, TileView tileView) {
+    public Puzzle15View(String gameId, String gameState, TileView tileView) {
         this.gameId = gameId;
         this.gameState = gameState;
         this.tileView = tileView;

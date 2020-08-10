@@ -1,6 +1,6 @@
-package io.github.dziugasj.puzzle15.tile.service;
+package io.github.dziugasj.puzzle15.board.service;
 
-import io.github.dziugasj.puzzle15.tile.model.Tile;
+import io.github.dziugasj.puzzle15.board.model.BoardTile;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -18,23 +18,23 @@ import static java.util.stream.IntStream.range;
 public class ShuffledTileProvider implements TileProviderService {
 
     @Override
-    public Map<Integer, Tile> getTiles(int size) {
+    public Map<Integer, BoardTile> getTiles(int size) {
         var tiles = createTiles(size);
-        tiles.add(new Tile(empty()));
+        tiles.add(new BoardTile(empty()));
         shuffle(tiles);
 
         return toMap(tiles);
     }
 
-    private Map<Integer, Tile> toMap(List<Tile> list) {
+    private Map<Integer, BoardTile> toMap(List<BoardTile> list) {
         return range(0, list.size())
                 .boxed()
                 .collect(Collectors.toMap(identity(), list::get));
     }
 
-    private List<Tile> createTiles(int size) {
+    private List<BoardTile> createTiles(int size) {
         return range(1, size)
-                .mapToObj(value -> new Tile(of(value)))
+                .mapToObj(value -> new BoardTile(of(value)))
                 .collect(toList());
     }
 }

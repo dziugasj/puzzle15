@@ -1,5 +1,6 @@
 package io.github.dziugasj.puzzle15.tile.model;
 
+import io.github.dziugasj.puzzle15.board.model.BoardTile;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
@@ -10,24 +11,24 @@ import static java.util.Optional.of;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class TileTest {
+class BoardTileTest {
     private final static int NO = 5;
     private final static Optional<Integer> ANY_VALUE = of(NO);
     private final static Optional<Integer> EMPTY_VALUE = empty();
 
     @Test
     void getValue() {
-        assertEquals(ANY_VALUE, new Tile(ANY_VALUE).getValue());
+        assertEquals(ANY_VALUE, new BoardTile(ANY_VALUE).getValue());
     }
 
     @Test
     void free() {
-        assertTrue(new Tile(EMPTY_VALUE).free());
+        assertTrue(new BoardTile(EMPTY_VALUE).free());
     }
 
     @Test
     void getView() {
-        assertEquals(valueOf(NO), new Tile(ANY_VALUE).getView());
-        assertEquals("", new Tile(EMPTY_VALUE).getView());
+        assertEquals(valueOf(NO), new BoardTile(ANY_VALUE).getView());
+        assertEquals("", new BoardTile(EMPTY_VALUE).getView());
     }
 }

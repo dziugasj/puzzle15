@@ -3,17 +3,20 @@ package io.github.dziugasj.puzzle15.game.service;
 import io.github.dziugasj.puzzle15.board.model.Board;
 import io.github.dziugasj.puzzle15.board.model.BoardFactory;
 import io.github.dziugasj.puzzle15.game.exception.GameNotFoundException;
+import io.github.dziugasj.puzzle15.game.model.Puzzle15;
+import io.github.dziugasj.puzzle15.game.model.Puzzle15Parameters;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.function.Supplier;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
-class InMemoryGameTest {
+class InMemoryPuzzle15Test {
     private final static String GAME_ID = "xxx-555-yyy";
     private static final int DIMENSION = 4;
 
@@ -25,10 +28,7 @@ class InMemoryGameTest {
 
     @BeforeEach
     public void beforeEach() {
-        when(generator.generate()).thenReturn(GAME_ID);
-        when(boardFactory.createShuffledBoard(DIMENSION)).thenReturn(board);
-
-        repository = new InMemoryGame(generator, boardFactory);
+        repository = new InMemoryGame();
     }
 
     @Test
@@ -40,14 +40,14 @@ class InMemoryGameTest {
     void getGames_whenCreated() {
         int size = 1;
 
-        repository.create(DIMENSION);
+        repository.create(createGameSupplier());
 
         assertEquals(size, repository.getGames().size());
     }
 
     @Test
     void createAndFind() {
-        var game = repository.create(DIMENSION);
+        var game = repository.create(createGameSupplier());
 
         assertEquals(game, repository.findByGameId(game.getId()));
     }
@@ -60,11 +60,15 @@ class InMemoryGameTest {
     @Test
     void updateGameTilePosition() {
         int position = 0;
-        var game = repository.create(DIMENSION);
+        var game = repository.create(createGameSupplier());
 
-        repository.updateGameTilePosition(game.getId(), position);
+        repository.playGame(game.getId(), new Puzzle15Parameters(position));
 
         verify(board).updateTile(position);
         verify(board).sorted();
+    }
+
+    private Supplier<Puzzle15> createGameSupplier() {
+        return () -> new Puzzle15(GAME_ID, board);
     }
 }

@@ -1,16 +1,18 @@
 package io.github.dziugasj.puzzle15.game.service;
 
-import io.github.dziugasj.puzzle15.game.model.Game;
+import io.github.dziugasj.puzzle15.game.model.BoardGame;
+import io.github.dziugasj.puzzle15.game.model.BoardGameParameters;
 
 import java.util.Collection;
+import java.util.function.Supplier;
 
-public interface GameService {
+public interface GameService<T extends BoardGame> {
 
-    Collection<Game> getGames();
+    Collection<T> getGames();
 
-    Game create(int dimension);
+    T create(Supplier<T> supplier);
 
-    Game findByGameId(String gameId);
+    T findByGameId(String gameId);
 
-    void updateGameTilePosition(String gameId, int position);
+    void playGame(String gameId, BoardGameParameters boardGameParameters);
 }

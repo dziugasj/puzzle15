@@ -2,7 +2,6 @@ package io.github.dziugasj.puzzle15.board.model;
 
 import io.github.dziugasj.puzzle15.board.exception.MoveNotPossibleException;
 import io.github.dziugasj.puzzle15.board.model.Board.Direction;
-import io.github.dziugasj.puzzle15.tile.model.Tile;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -104,8 +103,8 @@ class BoardTest {
 
     @Test
     void getTile() {
-        assertEquals(new Tile(of(1)), board.getTile(0));
-        assertEquals(new Tile(empty()), board.getTile(15));
+        assertEquals(new BoardTile(of(1)), board.getTile(0));
+        assertEquals(new BoardTile(empty()), board.getTile(15));
     }
 
     @Test
@@ -128,24 +127,24 @@ class BoardTest {
         return new Board(mapOf4x4(), 4);
     }
 
-    private Map<Integer, Tile> mapOf4x4() {
-        var map = new HashMap<Integer, Tile>();
-        map.put(0, new Tile(of(1)));
-        map.put(1, new Tile(of(2)));
-        map.put(2, new Tile(of(3)));
-        map.put(3, new Tile(of(4)));
-        map.put(4, new Tile(of(5)));
-        map.put(5, new Tile(of(6)));
-        map.put(6, new Tile(of(7)));
-        map.put(7, new Tile(of(8)));
-        map.put(8, new Tile(of(9)));
-        map.put(9, new Tile(of(10)));
-        map.put(10, new Tile(of(11)));
-        map.put(11, new Tile(of(12)));
-        map.put(12, new Tile(of(13)));
-        map.put(13, new Tile(of(14)));
-        map.put(14, new Tile(of(15)));
-        map.put(15, new Tile(empty()));
+    private Map<Integer, BoardTile> mapOf4x4() {
+        var map = new HashMap<Integer, BoardTile>();
+        map.put(0, new BoardTile(of(1)));
+        map.put(1, new BoardTile(of(2)));
+        map.put(2, new BoardTile(of(3)));
+        map.put(3, new BoardTile(of(4)));
+        map.put(4, new BoardTile(of(5)));
+        map.put(5, new BoardTile(of(6)));
+        map.put(6, new BoardTile(of(7)));
+        map.put(7, new BoardTile(of(8)));
+        map.put(8, new BoardTile(of(9)));
+        map.put(9, new BoardTile(of(10)));
+        map.put(10, new BoardTile(of(11)));
+        map.put(11, new BoardTile(of(12)));
+        map.put(12, new BoardTile(of(13)));
+        map.put(13, new BoardTile(of(14)));
+        map.put(14, new BoardTile(of(15)));
+        map.put(15, new BoardTile(empty()));
 
         return map;
     }
